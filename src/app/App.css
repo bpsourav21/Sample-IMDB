@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.mainWrapper .home {
+  margin-top: 65px;
+}
+.mainWrapper .home .tabSection {
+  display: flex;
+}
+.mainWrapper .home .tabSection .tabItem {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.mainWrapper .home .tabSection .tabItem h5 {
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+.mainWrapper .home .tabSection .active {
+  background-color: #007bff;
+}
+.mainWrapper .home .tabSection .active h5 {
+  color: white;
+}
