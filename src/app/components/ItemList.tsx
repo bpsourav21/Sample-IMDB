@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { getPhones } from "../actions/phonesActions";
+import { getAllMovies } from "../actions/homeActions";
 
 import Item from "./Item";
 
 const ItemList = () => {
-  const itemListState = useAppSelector((state) => state.phones);
+  const homeState = useAppSelector((state) => state.home);
   const dispatch = useAppDispatch();
-  let phones = itemListState.phones;
+
   useEffect(() => {
-    dispatch(getPhones);
+    dispatch(getAllMovies);
   }, []);
+
+  let movies = homeState.movies;
   let itemsPerPageArray: number[] = [5, 10, 15];
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageArray[0]);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = phones.slice(indexOfFirstItem, indexOfLastItem);
-  const pageCount = Math.ceil(phones.length / itemsPerPage);
+  const currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
+  const pageCount = Math.ceil(movies.length / itemsPerPage);
 
   let pageNumberArray = [];
   for (let i = 0; i < pageCount; i++) {
@@ -44,13 +46,14 @@ const ItemList = () => {
     </nav>
   );
 
-  let items = itemListState.success ? (
-    <>
-      {currentItems.map((phone: any, index: number) => (
-        <Item data={phone} itemKey={"item_" + index} />
-      ))}
-    </>
-  ) : null;
+  let items =
+    homeState.movies.length > 0 ? (
+      <>
+        {currentItems.map((movie: any, index: number) => (
+          <Item data={movie} itemKey={"item_" + index} />
+        ))}
+      </>
+    ) : null;
   let itemsSection = <div className="row row-cols-5">{items}</div>;
 
   let paginationSection = (
