@@ -33,3 +33,7 @@ code {
 .mainWrapper .home .tabSection .active h5 {
   color: white;
 }
+.mainWrapper .home .searchbox {
+  width: 500px;
+  float: left;
+}

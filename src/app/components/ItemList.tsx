@@ -3,19 +3,31 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { getAllMovies } from "../actions/homeActions";
 
 import Item from "./Item";
+import _ from "underscore";
+import { HomeState } from "../reducers/homeReducer";
+import { MovieDto } from "../dtos/movie";
+import classNames from "classnames";
 
 const ItemList = () => {
-  const homeState = useAppSelector((state) => state.home);
+  const homeState: HomeState = useAppSelector((state) => state.home);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllMovies);
   }, []);
 
-  let movies = homeState.movies;
-  let itemsPerPageArray: number[] = [5, 10, 15];
+  let itemsPerPageArray: number[] = [25, 50, 200];
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageArray[0]);
+  const [searchText, setSearchText] = useState("");
+
+  let searchRegex = new RegExp("\\b(" + searchText + ")", "i")
+  let movies =
+    searchText !== ""
+      ? _.filter(homeState.movies, (movie) =>
+          movie.name.match(searchRegex) !== null
+        )
+      : homeState.movies;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
@@ -23,8 +35,12 @@ const ItemList = () => {
 
   let pageNumberArray = [];
   for (let i = 0; i < pageCount; i++) {
+    var pageItemClass = classNames({
+      "page-item": true,
+      active: currentPage === i + 1,
+    });
     pageNumberArray[i] = (
-      <li className={currentPage === i + 1 ? "page-item active" : "page-item"}>
+      <li className={pageItemClass}>
         <button className="page-link" onClick={() => setCurrentPage(i + 1)}>
           {i + 1}
         </button>
@@ -32,28 +48,48 @@ const ItemList = () => {
     );
   }
 
-  let itemsPerPageSection = (
+  let itemsPerPageSectionWithSearchbox = (
     <nav aria-label="Page navigation" style={{ marginTop: "50px" }}>
+      <div className="searchbox">
+        <div className="form-group has-search">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
+      </div>
       <ul className="pagination justify-content-end">
-        {itemsPerPageArray.map((i) => (
-          <li className={itemsPerPage === i ? "page-item active" : "page-item"}>
-            <button className="page-link" onClick={() => setItemsPerPage(i)}>
-              {i}
-            </button>
-          </li>
-        ))}
+        {_.map(itemsPerPageArray, (i) => {
+          var itemsPerPageClass = classNames({
+            "page-item": true,
+            active: itemsPerPage === i,
+          });
+          return (
+            <li className={itemsPerPageClass}>
+              <button className="page-link" onClick={() => setItemsPerPage(i)}>
+                {i}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
 
   let items =
-    homeState.movies.length > 0 ? (
+    movies.length > 0 ? (
       <>
-        {currentItems.map((movie: any, index: number) => (
+        {_.map(currentItems, (movie: any, index: number) => (
           <Item data={movie} itemKey={"item_" + index} />
         ))}
       </>
-    ) : null;
+    ) : (
+      <>
+        <h5>No data found</h5>
+      </>
+    );
   let itemsSection = <div className="row row-cols-5">{items}</div>;
 
   let paginationSection = (
@@ -67,7 +103,7 @@ const ItemList = () => {
             Previous
           </button>
         </li>
-        {pageNumberArray.map((li) => li)}
+        {_.map(pageNumberArray, (li) => li)}
         <li
           className={
             currentPage === pageCount ? "page-item disabled" : "page-item "
@@ -85,7 +121,7 @@ const ItemList = () => {
   );
   return (
     <div>
-      {itemsPerPageSection}
+      {itemsPerPageSectionWithSearchbox}
       {itemsSection}
       {paginationSection}
     </div>
