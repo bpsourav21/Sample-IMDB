@@ -21,7 +21,7 @@ export interface HomeState {
 }
 
 export const itemsPerPageArray: number[] = [25, 50, 200];
-export const tabItems: string[] = ["All Movies", "Trending"];
+export const tabItems: string[] = ["All", "Trending"];
 
 const initialState: HomeState = {
   movies: [],
