@@ -127,7 +127,7 @@ const ItemList = () => {
       {itemsSection}
       {paginationSection}
       <ModalComponent
-        showModal={true}
+        showModal={false}
         onCloseModal={() => console.log("hello")}
       >
         <div>

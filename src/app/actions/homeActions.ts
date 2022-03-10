@@ -8,10 +8,10 @@ import {
 import db from "../helpers/db.json";
 import { AppDispatch } from "../store";
 
-export const selectDefaultTab = (dispatch: AppDispatch, selectedTab: string) => {
-  console.log("uuuu", selectedTab);
-  
-  dispatch({ type: ON_SELECT_TAB , payload: selectedTab});
+export const selectDefaultTab = (selectedTab: string) => {
+  return (dispatch: AppDispatch) => {
+    dispatch({ type: ON_SELECT_TAB, payload: selectedTab });
+  };
 };
 
 export const getAllMovies = (dispatch: AppDispatch) => {

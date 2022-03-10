@@ -7,12 +7,9 @@ interface Props {
   title?: string;
 }
 
-interface State {}
-
 class ModalComponent extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
-    this.state = { color: "red" };
   }
   render() {
     const modalClass = classNames({

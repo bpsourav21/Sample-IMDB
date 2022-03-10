@@ -21,7 +21,7 @@ const initialState: HomeState = {
   selectedTab: "",
 };
 
-export const homeReducer = (state: HomeState = initialState, action: any) => {
+export const homeReducer = (state: HomeState = initialState, action: any) : HomeState => {
   switch (action.type) {
     case ON_SELECT_TAB:
       return _.assign({}, state, {

@@ -5,18 +5,20 @@ import Home from "./components/Home";
 import "./App.css";
 // import PhoneDetail from "./components/PhoneDetail";
 
-function App() {
-  return (
-    <div className="mainWrapper">
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/phone-detail/:id" element={<PhoneDetail />} /> */}
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="mainWrapper">
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/phone-detail/:id" element={<PhoneDetail />} /> */}
+          </Routes>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,40 +1,47 @@
 import classNames from "classnames";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import _ from "underscore";
 import { selectDefaultTab } from "../actions/homeActions";
-import { useAppSelector, useAppDispatch } from "../hooks";
+import { mapStateToProps, mapDispatchToProps, BaseProps } from "../hooks";
 import { HomeState } from "../reducers/homeReducer";
 import ItemList from "./ItemList";
 
-const Home = () => {
-  const tabItems = ["All Movies", "Trending"];
-  const homeState: HomeState = useAppSelector((state) => state.home);
-  const selectedTab = homeState.selectedTab;
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(() => selectDefaultTab(dispatch, tabItems[0]));
-  }, []);
-  let tabSection = _.map(tabItems, (tab, index) => {
-    var tabClass = classNames({
-      tabItem: true,
-      active: selectedTab === tab,
+const tabItems = ["All Movies", "Trending"];
+class Home extends React.Component<BaseProps, {}> {
+  constructor(props: BaseProps) {
+    super(props);
+    this.selectDefaultTab(tabItems[0]);
+  }
+  private selectDefaultTab(tabName: string): void {
+    this.props.dispatch(selectDefaultTab(tabName));
+  }
+  render() {
+    const homeState: HomeState = this.props.rootState.home;
+    const selectedTab = homeState.selectedTab;
+    let tabSection = _.map(tabItems, (tab, index) => {
+      var tabClass = classNames({
+        tabItem: true,
+        active: selectedTab === tab,
+      });
+      return (
+        <div
+          className={tabClass}
+          key={"tabItem_" + index}
+          onClick={() => this.selectDefaultTab(tab)}
+        >
+          <h5>{tab}</h5>
+        </div>
+      );
     });
+
     return (
-      <div
-        className={tabClass}
-        key={"tabItem_" + index}
-        onClick={() => dispatch(() => selectDefaultTab(dispatch, tab))}
-      >
-        <h5>{tab}</h5>
+      <div className="container home">
+        <div className="tabSection">{tabSection}</div>
+        <ItemList />
       </div>
     );
-  });
-  return (
-    <div className="container home">
-      <div className="tabSection">{tabSection}</div>
-      <ItemList />
-    </div>
-  );
-};
+  }
+}
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
