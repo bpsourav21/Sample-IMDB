@@ -7,6 +7,7 @@ import _ from "underscore";
 import { HomeState } from "../reducers/homeReducer";
 import { MovieDto } from "../dtos/movie";
 import classNames from "classnames";
+import ModalComponent from "./ModalComponent";
 
 const ItemList = () => {
   const homeState: HomeState = useAppSelector((state) => state.home);
@@ -21,11 +22,12 @@ const ItemList = () => {
   const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageArray[0]);
   const [searchText, setSearchText] = useState("");
 
-  let searchRegex = new RegExp("\\b(" + searchText + ")", "i")
+  let searchRegex = new RegExp("\\b(" + searchText + ")", "i");
   let movies =
     searchText !== ""
-      ? _.filter(homeState.movies, (movie) =>
-          movie.name.match(searchRegex) !== null
+      ? _.filter(
+          homeState.movies,
+          (movie) => movie.name.match(searchRegex) !== null
         )
       : homeState.movies;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -124,6 +126,14 @@ const ItemList = () => {
       {itemsPerPageSectionWithSearchbox}
       {itemsSection}
       {paginationSection}
+      <ModalComponent
+        showModal={true}
+        onCloseModal={() => console.log("hello")}
+      >
+        <div>
+          <h3> hell0</h3>
+        </div>
+      </ModalComponent>
     </div>
   );
 };
