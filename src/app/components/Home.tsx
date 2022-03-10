@@ -4,18 +4,16 @@ import { connect } from "react-redux";
 import _ from "underscore";
 import { selectDefaultTab } from "../actions/homeActions";
 import { mapStateToProps, mapDispatchToProps, BaseProps } from "../hooks";
-import { HomeState } from "../reducers/homeReducer";
+import { HomeState, tabItems } from "../reducers/homeReducer";
 import ItemList from "./ItemList";
 
-const tabItems = ["All Movies", "Trending"];
 class Home extends React.Component<BaseProps, {}> {
   constructor(props: BaseProps) {
     super(props);
-    this.selectDefaultTab(tabItems[0]);
   }
-  private selectDefaultTab(tabName: string): void {
+  selectDefaultTab = (tabName: string): void => {
     this.props.dispatch(selectDefaultTab(tabName));
-  }
+  };
   render() {
     const homeState: HomeState = this.props.rootState.home;
     const selectedTab = homeState.selectedTab;
