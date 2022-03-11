@@ -8,6 +8,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+.modalBackdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
 .loading-overlay {
   top: 0;
   bottom: 0;

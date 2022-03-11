@@ -14,13 +14,11 @@ class Item extends React.Component<Props, {}> {
     );
     return (
       <div className="item">
-        <Link to={{ pathname: `/movie-detail/${data._id}` }}>
-          <img
-            src={"https://picsum.photos/300/200?random=" + data.metaScore}
-            className="card-img-top"
-            alt="..."
-          />
-        </Link>
+        <img
+          src={"https://picsum.photos/300/200?random=" + data.metaScore}
+          className="card-img-top"
+          alt="..."
+        />
         <div className="card-body">
           <h4>{data.name}</h4>
           <h6>{data.genre}</h6>

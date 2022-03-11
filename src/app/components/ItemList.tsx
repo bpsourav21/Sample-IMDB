@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  onCloseModal,
+  selectMovie,
   setCurrentPage,
   setItemsPerPage,
   setSearchText,
@@ -90,7 +92,11 @@ class ItemList extends React.Component<BaseProps, {}> {
       movies.length > 0 ? (
         <>
           {_.map(currentItems, (movie: any, index: number) => (
-            <div key={"item_" + index} className="col">
+            <div
+              key={"item_" + index}
+              className="col"
+              onClick={() => this.props.dispatch(selectMovie(movie))}
+            >
               <div className="card p-2 data">
                 <Item data={movie} hideOverView={true} />
               </div>
@@ -160,14 +166,20 @@ class ItemList extends React.Component<BaseProps, {}> {
       </nav>
     );
 
+    let modalContent = <h5>Movie not found</h5>;
+    let movieTitle = "";
+    if (homeState.selectedMovie !== undefined) {
+      modalContent = <Item data={homeState.selectedMovie} />;
+      movieTitle = homeState.selectedMovie.name;
+    }
+    
     let modalview = (
       <ModalComponent
-        showModal={false}
-        onCloseModal={() => console.log("hello")}
+        showModal={homeState.showModal}
+        onCloseModal={() => this.props.dispatch(onCloseModal())}
+        title={movieTitle}
       >
-        <div>
-          <h3> hell0</h3>
-        </div>
+        {modalContent}
       </ModalComponent>
     );
 

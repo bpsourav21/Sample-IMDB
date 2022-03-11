@@ -6,6 +6,8 @@ import {
   SET_PAGE_NUMBER,
   ON_SEARCH_TEXT,
   SET_ITEMS_PER_PAGE,
+  SET_MOVIE_FOR_MODAL,
+  ON_CONTROL_MODAL,
 } from "../actions/actionTypes";
 import { MovieDto } from "../models/movie";
 
@@ -17,6 +19,8 @@ export interface HomeState {
   currentPage: number;
   itemsPerPage: number;
   searchText: string;
+  selectedMovie: MovieDto | undefined;
+  showModal: boolean;
 }
 
 export const itemsPerPageArray: number[] = [25, 50, 200];
@@ -30,6 +34,8 @@ const initialState: HomeState = {
   currentPage: 1,
   itemsPerPage: itemsPerPageArray[0],
   searchText: "",
+  selectedMovie: undefined,
+  showModal: false,
 };
 
 export const homeReducer = (
@@ -74,6 +80,16 @@ export const homeReducer = (
       return {
         ...state,
         searchText: action.payload,
+      };
+    case SET_MOVIE_FOR_MODAL:
+      return {
+        ...state,
+        selectedMovie: action.payload,
+      };
+    case ON_CONTROL_MODAL:
+      return {
+        ...state,
+        showModal: action.payload,
       };
     default:
       return state;

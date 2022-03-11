@@ -3,9 +3,11 @@ import {
   MOVIE_REQUEST_FAIL,
   MOVIE_REQUEST_LOADING,
   MOVIE_REQUEST_SUCCESS,
+  ON_CONTROL_MODAL,
   ON_SEARCH_TEXT,
   ON_SELECT_TAB,
   SET_ITEMS_PER_PAGE,
+  SET_MOVIE_FOR_MODAL,
   SET_PAGE_NUMBER,
   // MOVIE_REQUEST_FAIL,
 } from "../actions/actionTypes";
@@ -74,16 +76,32 @@ export const getAllTrendingMovies = () => {
   };
 };
 
+export const selectMovie = (movie: MovieDto) => {
+  return (dispatch: AppDispatch) => {
+    dispatch({ type: ON_CONTROL_MODAL, payload: true });
+    dispatch({ type: SET_MOVIE_FOR_MODAL, payload: movie });
+  };
+};
+
+export const onCloseModal = () => {
+  return (dispatch: AppDispatch) => {
+    dispatch({ type: ON_CONTROL_MODAL, payload: false });
+    dispatch({ type: SET_MOVIE_FOR_MODAL, payload: undefined });
+  };
+};
+
 export const setCurrentPage = (pageNumber: number) => {
   return (dispatch: AppDispatch) => {
     dispatch({ type: SET_PAGE_NUMBER, payload: pageNumber });
   };
 };
+
 export const setItemsPerPage = (itemsPerPage: number) => {
   return (dispatch: AppDispatch) => {
     dispatch({ type: SET_ITEMS_PER_PAGE, payload: itemsPerPage });
   };
 };
+
 export const setSearchText = (searchText: string) => {
   return (dispatch: AppDispatch) => {
     dispatch({ type: ON_SEARCH_TEXT, payload: searchText });

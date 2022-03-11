@@ -5,15 +5,31 @@ interface Props {
   showModal: boolean;
   onCloseModal: () => void;
   title?: string;
+  showFooter?: boolean;
 }
 
 class ModalComponent extends React.Component<Props, {}> {
   render() {
     const modalClass = classNames({
       modal: true,
+      modalBackdrop: true,
       fade: true,
       show: this.props.showModal,
     });
+    let modalFooter = this.props.showFooter && (
+      <div className="modal-footer">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" className="btn btn-primary">
+          Understood
+        </button>
+      </div>
+    );
     return (
       <div
         className={modalClass}
@@ -39,18 +55,7 @@ class ModalComponent extends React.Component<Props, {}> {
               ></button>
             </div>
             <div className="modal-body">{this.props.children}</div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
-              </button>
-            </div>
+            {modalFooter}
           </div>
         </div>
       </div>
