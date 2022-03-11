@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import "./App.css";
-// import PhoneDetail from "./components/PhoneDetail";
+// import Item from "./components/Item";
 
 class App extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class App extends React.Component {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/phone-detail/:id" element={<PhoneDetail />} /> */}
+            {/* <Route path="/movie-detail/:id" element={<Item />} /> */}
           </Routes>
         </BrowserRouter>
       </div>

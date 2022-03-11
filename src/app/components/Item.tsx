@@ -14,7 +14,7 @@ class Item extends React.Component<Props, {}> {
     );
     return (
       <div className="item">
-        <Link to={{ pathname: `/phone-detail/${data._id}` }}>
+        <Link to={{ pathname: `/movie-detail/${data._id}` }}>
           <img
             src={"https://picsum.photos/300/200?random=" + data.metaScore}
             className="card-img-top"
