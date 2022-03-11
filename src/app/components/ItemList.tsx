@@ -41,7 +41,7 @@ class ItemList extends React.Component<BaseProps, {}> {
         active: currentPage === i + 1,
       });
       pageNumberArray[i] = (
-        <li className={pageItemClass}>
+        <li className={pageItemClass} key={"pagination_" + (i + 1)}>
           <button
             className="page-link"
             onClick={() => this.props.dispatch(setCurrentPage(i + 1))}
@@ -67,13 +67,13 @@ class ItemList extends React.Component<BaseProps, {}> {
           </div>
         </div>
         <ul className="pagination justify-content-end">
-          {_.map(itemsPerPageArray, (i) => {
+          {_.map(itemsPerPageArray, (i, idx) => {
             var itemsPerPageClass = classNames({
               "page-item": true,
               active: itemsPerPage === i,
             });
             return (
-              <li className={itemsPerPageClass}>
+              <li className={itemsPerPageClass} key={"itemsPerPage_" + idx}>
                 <button
                   className="page-link"
                   onClick={() => this.props.dispatch(setItemsPerPage(i))}
@@ -91,7 +91,11 @@ class ItemList extends React.Component<BaseProps, {}> {
       movies.length > 0 ? (
         <>
           {_.map(currentItems, (movie: any, index: number) => (
-            <Item data={movie} itemKey={"item_" + index} />
+            <Item
+              data={movie}
+              itemKey={"item_" + index}
+              key={"item_" + index}
+            />
           ))}
         </>
       ) : (
@@ -104,6 +108,16 @@ class ItemList extends React.Component<BaseProps, {}> {
     let paginationSection = (
       <nav aria-label="Page navigation" style={{ marginTop: "50px" }}>
         <ul className="pagination justify-content-end">
+          <li
+            className={currentPage === 1 ? "page-item disabled" : "page-item "}
+          >
+            <button
+              className="page-link"
+              onClick={() => this.props.dispatch(setCurrentPage(1))}
+            >
+              First Page
+            </button>
+          </li>
           <li
             className={currentPage === 1 ? "page-item disabled" : "page-item "}
           >
@@ -129,6 +143,18 @@ class ItemList extends React.Component<BaseProps, {}> {
               }
             >
               Next
+            </button>
+          </li>
+          <li
+            className={
+              currentPage === pageCount ? "page-item disabled" : "page-item"
+            }
+          >
+            <button
+              className="page-link"
+              onClick={() => this.props.dispatch(setCurrentPage(pageCount))}
+            >
+              Last Page
             </button>
           </li>
         </ul>
