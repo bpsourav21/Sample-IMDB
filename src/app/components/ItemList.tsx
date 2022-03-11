@@ -33,17 +33,20 @@ class ItemList extends React.Component<BaseProps, {}> {
     const isLoading = homeState.isLoading;
 
     let searchRegex = new RegExp("\\b(" + searchText + ")", "i");
-    let movies =
-      searchText !== ""
-        ? _.filter(
-            homeState.movies,
-            (movie) => movie.name.match(searchRegex) !== null
-          )
-        : homeState.movies;
+    let movies = homeState.movies;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
     const pageCount = Math.ceil(movies.length / itemsPerPage);
+
+    let currentItems;
+    if (searchText !== "") {
+      currentItems = _.filter(
+        movies,
+        (movie) => movie.name.match(searchRegex) !== null
+      );
+    } else {
+      currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
+    }
 
     let pageNumberArray = [];
     for (let i = 0; i < pageCount; i++) {
@@ -99,7 +102,7 @@ class ItemList extends React.Component<BaseProps, {}> {
     );
 
     let items =
-      movies.length > 0 ? (
+      currentItems.length > 0 ? (
         <>
           {_.map(currentItems, (movie: any, index: number) => (
             <div
