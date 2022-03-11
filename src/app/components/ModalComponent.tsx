@@ -8,9 +8,6 @@ interface Props {
 }
 
 class ModalComponent extends React.Component<Props, {}> {
-  constructor(props: Props) {
-    super(props);
-  }
   render() {
     const modalClass = classNames({
       modal: true,

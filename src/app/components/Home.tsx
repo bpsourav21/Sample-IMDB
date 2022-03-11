@@ -10,6 +10,7 @@ import ItemList from "./ItemList";
 class Home extends React.Component<BaseProps, {}> {
   constructor(props: BaseProps) {
     super(props);
+    this.selectDefaultTab(tabItems[0]);
   }
   selectDefaultTab = (tabName: string): void => {
     this.props.dispatch(selectDefaultTab(tabName));

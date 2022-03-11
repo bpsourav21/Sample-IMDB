@@ -12,17 +12,14 @@ import classNames from "classnames";
 import ModalComponent from "./ModalComponent";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps, BaseProps } from "../hooks";
+import LoadingOverlay from "./LoadingOverlay";
 class ItemList extends React.Component<BaseProps, {}> {
-  constructor(props: BaseProps) {
-    super(props);
-    this.props.dispatch(getAllMovies);
-  }
-
   render() {
     const homeState: HomeState = this.props.rootState.home;
     const currentPage = homeState.currentPage;
     const itemsPerPage = homeState.itemsPerPage;
     const searchText = homeState.searchText;
+    const isLoading = homeState.isLoading;
 
     let searchRegex = new RegExp("\\b(" + searchText + ")", "i");
     let movies =
@@ -36,7 +33,7 @@ class ItemList extends React.Component<BaseProps, {}> {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
     const pageCount = Math.ceil(movies.length / itemsPerPage);
-    
+
     let pageNumberArray = [];
     for (let i = 0; i < pageCount; i++) {
       var pageItemClass = classNames({
@@ -112,7 +109,9 @@ class ItemList extends React.Component<BaseProps, {}> {
           >
             <button
               className="page-link"
-              onClick={() => setCurrentPage(currentPage - 1)}
+              onClick={() =>
+                this.props.dispatch(setCurrentPage(currentPage - 1))
+              }
             >
               Previous
             </button>
@@ -120,12 +119,14 @@ class ItemList extends React.Component<BaseProps, {}> {
           {_.map(pageNumberArray, (li) => li)}
           <li
             className={
-              currentPage === pageCount ? "page-item disabled" : "page-item "
+              currentPage === pageCount ? "page-item disabled" : "page-item"
             }
           >
             <button
               className="page-link"
-              onClick={() => setCurrentPage(currentPage + 1)}
+              onClick={() =>
+                this.props.dispatch(setCurrentPage(currentPage + 1))
+              }
             >
               Next
             </button>
@@ -133,21 +134,30 @@ class ItemList extends React.Component<BaseProps, {}> {
         </ul>
       </nav>
     );
-    return (
+
+    let modalview = (
+      <ModalComponent
+        showModal={false}
+        onCloseModal={() => console.log("hello")}
+      >
+        <div>
+          <h3> hell0</h3>
+        </div>
+      </ModalComponent>
+    );
+
+    let content = isLoading ? (
+      <LoadingOverlay />
+    ) : (
       <div>
         {itemsPerPageSectionWithSearchbox}
         {itemsSection}
         {paginationSection}
-        <ModalComponent
-          showModal={false}
-          onCloseModal={() => console.log("hello")}
-        >
-          <div>
-            <h3> hell0</h3>
-          </div>
-        </ModalComponent>
+        {modalview}
       </div>
     );
+
+    return content;
   }
 }
 

@@ -8,7 +8,6 @@ import {
   SET_ITEMS_PER_PAGE,
 } from "../actions/actionTypes";
 import { MovieDto } from "../models/movie";
-import _ from "underscore";
 
 export interface HomeState {
   movies: MovieDto[];
@@ -53,7 +52,7 @@ export const homeReducer = (
       return {
         ...state,
         isLoading: false,
-        movies: _.sortBy(action.payload, (movie: MovieDto) => movie.name),
+        movies: action.payload,
       };
     case MOVIE_REQUEST_FAIL:
       return {
