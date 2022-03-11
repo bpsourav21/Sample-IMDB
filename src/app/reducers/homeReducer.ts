@@ -7,7 +7,7 @@ import {
   ON_SEARCH_TEXT,
   SET_ITEMS_PER_PAGE,
 } from "../actions/actionTypes";
-import { MovieDto } from "../dtos/movie";
+import { MovieDto } from "../models/movie";
 import _ from "underscore";
 
 export interface HomeState {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { MovieDto } from "../dtos/movie";
+import { MovieDto } from "../models/movie";
 
 interface Props {
   itemKey: string;

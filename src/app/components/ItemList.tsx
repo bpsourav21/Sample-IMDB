@@ -8,7 +8,6 @@ import {
 import Item from "./Item";
 import _ from "underscore";
 import { HomeState, itemsPerPageArray } from "../reducers/homeReducer";
-import { MovieDto } from "../dtos/movie";
 import classNames from "classnames";
 import ModalComponent from "./ModalComponent";
 import { connect } from "react-redux";
