@@ -8,6 +8,7 @@ import {
   SET_ITEMS_PER_PAGE,
   SET_MOVIE_FOR_MODAL,
   ON_CONTROL_MODAL,
+  SET_ERROR_MESSAGE,
 } from "../actions/actionTypes";
 import { MovieDto } from "../models/movie";
 
@@ -90,6 +91,11 @@ export const homeReducer = (
       return {
         ...state,
         showModal: action.payload,
+      };
+    case SET_ERROR_MESSAGE:
+      return {
+        ...state,
+        err: action.payload,
       };
     default:
       return state;

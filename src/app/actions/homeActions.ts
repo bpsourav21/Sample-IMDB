@@ -6,6 +6,7 @@ import {
   ON_CONTROL_MODAL,
   ON_SEARCH_TEXT,
   ON_SELECT_TAB,
+  SET_ERROR_MESSAGE,
   SET_ITEMS_PER_PAGE,
   SET_MOVIE_FOR_MODAL,
   SET_PAGE_NUMBER,
@@ -105,5 +106,14 @@ export const setItemsPerPage = (itemsPerPage: number) => {
 export const setSearchText = (searchText: string) => {
   return (dispatch: AppDispatch) => {
     dispatch({ type: ON_SEARCH_TEXT, payload: searchText });
+  };
+};
+
+export const setErrorMessage = (errMsg: string) => {
+  return (dispatch: AppDispatch) => {
+    dispatch({ type: SET_ERROR_MESSAGE, payload: errMsg });
+    setTimeout(() => {
+      dispatch({ type: SET_ERROR_MESSAGE, payload: "" });
+    }, 5000);
   };
 };

@@ -28,4 +28,5 @@ export const updateQueryParams = (selectedTab: string, currentPage: number) => {
 export interface BaseProps {
   dispatch: AppDispatch;
   rootState: RootState;
+  queryParams?: URLSearchParams
 }
