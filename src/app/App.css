@@ -55,11 +55,13 @@ code {
 }
 .mainWrapper .home .data {
   cursor: pointer;
+  min-height: 300px;
+  margin-bottom: 20px;
 }
-.mainWrapper .home .data h4 {
+.mainWrapper .home .item h4 {
   font-size: 20px;
 }
-.mainWrapper .home .data .overview {
+.mainWrapper .home .item .overview {
   font-size: 12px;
   margin-bottom: 10px;
 }

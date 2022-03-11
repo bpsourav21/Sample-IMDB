@@ -91,11 +91,11 @@ class ItemList extends React.Component<BaseProps, {}> {
       movies.length > 0 ? (
         <>
           {_.map(currentItems, (movie: any, index: number) => (
-            <Item
-              data={movie}
-              itemKey={"item_" + index}
-              key={"item_" + index}
-            />
+            <div key={"item_" + index} className="col">
+              <div className="card p-2 data">
+                <Item data={movie} hideOverView={true} />
+              </div>
+            </div>
           ))}
         </>
       ) : (
