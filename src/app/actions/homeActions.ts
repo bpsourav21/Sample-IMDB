@@ -39,7 +39,7 @@ export const getAllMovies = () => {
           (movie: MovieDto) => movie.name
         );
         resolve(sortedMovie);
-      }, 300);
+      }, 100);
     });
 
     dbPromise
@@ -63,7 +63,7 @@ export const getAllTrendingMovies = () => {
           (movie: MovieDto) => movie.releaseYear
         ).reverse();
         resolve(sortedTrendingMovie);
-      }, 300);
+      }, 1200);
     });
 
     dbPromise
