@@ -3,7 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import _ from "underscore";
 import { selectDefaultTab } from "../actions/homeActions";
-import { mapStateToProps, mapDispatchToProps, BaseProps } from "../hooks";
+import {
+  mapStateToProps,
+  mapDispatchToProps,
+  BaseProps,
+  updateQueryParams,
+} from "../hooks";
 import { HomeState, tabItems } from "../reducers/homeReducer";
 import ItemList from "./ItemList";
 
@@ -14,6 +19,7 @@ class Home extends React.Component<BaseProps, {}> {
   }
   selectDefaultTab = (tabName: string): void => {
     this.props.dispatch(selectDefaultTab(tabName));
+    updateQueryParams(tabName, this.props.rootState.home.currentPage);
   };
   render() {
     const homeState: HomeState = this.props.rootState.home;
@@ -34,8 +40,21 @@ class Home extends React.Component<BaseProps, {}> {
       );
     });
 
+    const errorBlock = homeState.err !== "" && (
+      <div className="alert alert-danger alert-dismissible fade show">
+        <strong>Error!</strong>
+        {homeState.err}
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+      </div>
+    );
+
     return (
       <div className="container home">
+        {errorBlock}
         <div className="tabSection">{tabSection}</div>
         <ItemList />
       </div>

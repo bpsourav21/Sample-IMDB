@@ -16,6 +16,15 @@ export const mapDispatchToProps = (dispatch: AppDispatch) => {
   };
 };
 
+export const updateQueryParams = (selectedTab: string, currentPage: number) => {
+  let queryParams =
+    "?currentTab=" +
+    selectedTab.toLowerCase() +
+    "&currentPageNum=" +
+    currentPage;
+  window.history.pushState({}, "", queryParams);
+};
+
 export interface BaseProps {
   dispatch: AppDispatch;
   rootState: RootState;

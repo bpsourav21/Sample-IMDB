@@ -8,6 +8,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+.page-not-found {
+  margin-top: 10%;
+}
+.page-not-found h3 {
+  font-size: 30px;
+  text-align: center;
+}
 .modalBackdrop {
   background-color: rgba(0, 0, 0, 0.7);
 }

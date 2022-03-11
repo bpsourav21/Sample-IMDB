@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import "./App.css";
-// import Item from "./components/Item";
+import NotFound from "./components/NotFound";
 
 class App extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class App extends React.Component {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/movie-detail/:id" element={<Item />} /> */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </div>
