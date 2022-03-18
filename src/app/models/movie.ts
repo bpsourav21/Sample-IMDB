@@ -1,12 +1,11 @@
 export interface MovieDto {
-  _id: string;
-  name: string;
-  releaseYear: number;
-  certificate: string;
-  runtime: string;
-  genre: string;
-  imdbRating: number;
-  overview: string;
-  metaScore: string;
+  _id?: string;
+  imgUrl: string;
   director: string;
+  cast: string;
+  movieTitle: string;
+  rating?: string;
+  totalUser?: string;
+  releaseDate: string;
+  overview?: string;
 }

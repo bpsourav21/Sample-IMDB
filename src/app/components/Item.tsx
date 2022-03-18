@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { MovieDto } from "../models/movie";
 
 interface Props {
@@ -12,19 +11,26 @@ class Item extends React.Component<Props, {}> {
     const overview = !this.props.hideOverView && (
       <p className="card-text overview">{data.overview}</p>
     );
+
+    const ratingBlock = data.rating && data.totalUser && (
+      <p>
+        <b>{data.rating}</b> based on <b>{data.totalUser}</b> user ratings
+      </p>
+    );
     return (
       <div className="item">
-        <img
-          src={"https://picsum.photos/300/200?random=" + data.metaScore}
-          className="card-img-top"
-          alt="..."
-        />
+        <img src={data.imgUrl} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h4>{data.name}</h4>
-          <h6>{data.genre}</h6>
-          <h6>
-            {data.imdbRating} / {data.runtime}
-          </h6>
+          <h4>
+            {data.movieTitle} <span>({data.releaseDate})</span>
+          </h4>
+          <p>
+            <b>Director</b>: {data.director}
+          </p>
+          <p>
+            <b>Cast</b>: {data.cast}
+          </p>
+          {ratingBlock}
           {overview}
         </div>
       </div>

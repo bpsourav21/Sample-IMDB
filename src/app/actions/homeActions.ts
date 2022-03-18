@@ -37,7 +37,7 @@ export const getAllMovies = () => {
       setTimeout(() => {
         const sortedMovie: MovieDto[] = _.sortBy(
           db.movies,
-          (movie: MovieDto) => movie.name
+          (movie: MovieDto) => movie.movieTitle
         );
         resolve(sortedMovie);
       }, 100);
@@ -59,12 +59,8 @@ export const getAllTrendingMovies = () => {
 
     const dbPromise = new Promise<MovieDto[]>((resolve, reject) => {
       setTimeout(() => {
-        const sortedTrendingMovie: MovieDto[] = _.sortBy(
-          _.filter(db.movies, (movie) => movie.imdbRating > 8),
-          (movie: MovieDto) => movie.releaseYear
-        ).reverse();
-        resolve(sortedTrendingMovie);
-      }, 1200);
+        resolve(db.trending);
+      }, 400);
     });
 
     dbPromise

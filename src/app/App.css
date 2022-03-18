@@ -65,13 +65,24 @@ code {
 }
 .mainWrapper .home .data {
   cursor: pointer;
-  min-height: 300px;
+  min-height: 400px;
   margin-bottom: 20px;
 }
 .mainWrapper .home .item h4 {
   font-size: 20px;
+  min-height: 50px;
+}
+.mainWrapper .home .item span {
+  font-size: 18px;
+  color: grey;
 }
 .mainWrapper .home .item .overview {
   font-size: 12px;
   margin-bottom: 10px;
+}
+.mainWrapper .home .item img {
+  max-width: 250px;
+}
+.mainWrapper .home .modal .item {
+  text-align: center;
 }

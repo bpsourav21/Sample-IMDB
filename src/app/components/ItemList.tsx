@@ -42,7 +42,7 @@ class ItemList extends React.Component<BaseProps, {}> {
     if (searchText !== "") {
       currentItems = _.filter(
         movies,
-        (movie) => movie.name.match(searchRegex) !== null
+        (movie) => movie.movieTitle.match(searchRegex) !== null
       );
     } else {
       currentItems = movies.slice(indexOfFirstItem, indexOfLastItem);
